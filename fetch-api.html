@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="fetch-api.css">
+</head>
+<body>
+   <script>
+
+       function createAPI({ name,image,id,field}){
+    const container = document.createElement("div");
+    container.setAttribute("class","container")
+
+    container.innerHTML= `<h2><strong>${name}</strong></h2>
+    <img src=${image} alt=displayimage>
+    <p><span>ID:</span>${id}</p>
+    <p><span>Field:</span>${field}</p>`;
+
+
+document.body.append(container);
+
+       }
+     fetch("https://62136dd2f43692c9c6045007.mockapi.io/users")
+     .then((data) => data.json())
+     .then((api) => {
+         api.forEach((data_api) =>{
+             const dataApi = {
+                 name:data_api.name,
+                 image:data_api.avatar,
+                 id:data_api.id,
+                 field:data_api.field
+             };
+             createAPI(dataApi);
+         })
+     })
+     
+   </script>
+</body>
+</html>
